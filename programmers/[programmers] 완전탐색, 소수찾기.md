@@ -1,4 +1,4 @@
-## [프로그래머스] 완전탐색, 소수찾기
+## [programmers] 완전탐색, 소수찾기
 
 https://programmers.co.kr/learn/courses/30/lessons/42839
 
