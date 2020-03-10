@@ -7,13 +7,14 @@ https://programmers.co.kr/learn/courses/30/lessons/42842
 ```c++
 #include <iostream>
 #include <vector>
+#include <cmath>
 using namespace std;
 
 vector<int> solution(int brown, int red) {
 	vector<int> answer;
 	vector<int> width, height;
 	int total = brown + red;
-	for (int i = 1; i < total; i++) {
+	for (int i = 1; i <= sqrt(total); i++) {
 		if (!(total % i)) {
 			int tmp = total / i;
 			if (i >= tmp) {
