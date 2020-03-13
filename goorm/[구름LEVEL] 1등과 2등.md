@@ -70,6 +70,20 @@ int main() {
 
 
 
+### 더 간결하고 쉬운 방법
+
+알아보기 복잡했던 함수내용을 아래처럼 간단하게 바꿀 수 있다.
+
+```c++
+if (AB != string::npos && str.substr(AB + 2).find("21") != string::npos ||
+		BA != string::npos && str.substr(BA + 2).find("12") != string::npos)
+    cout << "Yes";
+else
+    cout << "No";
+```
+
+
+
 
 
 구름LEVEL 1등과 2등 goorm goormlevel
