@@ -16,7 +16,6 @@ int n, i, j, r, ans;
 vector<int> v;
 int main() {
 	scanf("%d", &n);
-	v.resize(0);
 	v.push_back(1);
 	for (i = 2; i <= n; i++) {
 		j = 0;
