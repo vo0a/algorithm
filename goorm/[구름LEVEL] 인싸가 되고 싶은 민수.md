@@ -12,7 +12,7 @@
 #include <iostream>
 using namespace std;
 int a, b;
-int prime(int num) {
+int leastDivisor(int num) {
 	for (int i = 2; i * i <= num; i++) {
 		if (!(num % i)) return i;
 	}
@@ -22,7 +22,7 @@ int main() {
 	scanf("%d %d", &a, &b);
 
 	if (a != b) printf("2");
-	else printf("%d", prime(a));
+	else printf("%d", leastDivisor(a));
 
 	return 0;
 }
