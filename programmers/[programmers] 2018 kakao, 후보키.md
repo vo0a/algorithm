@@ -1,4 +1,4 @@
-## [프로그래머스] 2018 kakao 후보키
+## [programmers] 2018 kakao 후보키
 
 > 1 << colsize
 

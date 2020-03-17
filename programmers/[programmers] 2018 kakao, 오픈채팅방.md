@@ -1,4 +1,4 @@
-## [프로그래머스] 2018 kakao 오픈채팅방
+## [programmers] 2018 kakao 오픈채팅방
 
 
 
