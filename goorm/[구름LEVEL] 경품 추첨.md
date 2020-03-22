@@ -6,7 +6,7 @@
 
 
 
-
+프리미엄 알고리즘 위클리 비타알고 시즌3 2주차
 
 ```c++
 #include <iostream>
@@ -34,5 +34,5 @@ int main() {
 
 
 
-구름LEVEL 경품 추첨 goorm goormlevel
+구름LEVEL 경품 추첨 goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
 

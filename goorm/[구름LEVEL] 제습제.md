@@ -1,0 +1,81 @@
+## [구름LEVEL] 제습제
+
+| 난이도 | 정답률 |
+| ------ | ------ |
+| ★★★    | -      |
+
+
+
+프리미엄 알고리즘 위클리 비타알고 시즌3 3주차
+
+```c++
+#include <iostream>
+#include <string.h>
+#include <algorithm>
+#include <queue>
+using namespace std;
+typedef pair<int, int> p;
+int dx[] = { 0,0,1,-1 }, dy[] = { 1,-1,0,0, };
+int n, ans;
+int arr[1005][1005], tarr[1005][1005];
+queue<p> cq, nq;
+int main() {
+	scanf("%d", &n);
+	for (int i = 0; i < n; i++) {
+		for (int j = 0; j < n; j++) {
+			scanf("%d", &arr[i][j]);
+			if (arr[i][j]) {
+				cq.push({ i, j });
+			}
+		}
+	}
+	if (cq.size() != n * n) {
+		queue<p> q;
+		while (1) {
+			int cnt = 0;
+			for (int i = 0; i < n; i++) {
+				for (int j = 0; j < n; j++) {
+					if (arr[i][j])break;
+					else cnt++;
+				}
+			}
+			if (cnt == n * n) break;
+
+			while (!cq.empty()) {
+				p front = cq.front();
+				cq.pop();
+				int x = front.first, y = front.second;
+				int flg = 0;
+				for (int k = 0; k < 4; k++) {
+					int nx = x + dx[k], ny = y + dy[k];
+					if (nx < 0 || ny < 0 || nx >= n || ny >= n) continue;
+					if (!arr[nx][ny]) {
+						flg = 1; break;
+					}
+				}
+				if (!flg) {
+					tarr[x][y] = 1;
+					nq.push({ x, y });
+				}
+			}
+			ans++;
+			cq = nq;
+			nq = q;
+			memcpy(arr, tarr, sizeof(arr));
+			memset(tarr, 0, sizeof(tarr));
+		}
+		printf("%d", ans);
+	}
+	else {
+		printf("-1");
+	}
+	return 0;
+}
+```
+
+
+
+
+
+구름LEVEL 제습제 goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
+
