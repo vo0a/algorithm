@@ -34,6 +34,31 @@ int main() {
 
 
 
+#### 입력받으면서 판단해도 가능
+
+```c++
+#include <iostream>
+#include <map>
+#include <algorithm>
+using namespace std;
+map<int, int> m;
+int n, flg;
+int main() {
+	scanf("%d", &n);
+	for (int i = 0, a, b; i < n; i++) {
+		scanf("%d %d", &a, &b);
+		m[b]++;
+		if (m[b] > 2) flg = 1;
+	}
+	if (flg)	printf("0");
+	else printf("1");
+	
+	return 0;
+}
+```
+
+
+
 
 
 구름LEVEL Dance Dance Revolution goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
