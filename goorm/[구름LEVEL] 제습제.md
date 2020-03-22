@@ -101,24 +101,22 @@ int main() {
 			if (arr[i][j]) q.push({ 1, { i, j } });
 		}
 	}
-	if (q.size() != n * n) {
-		while (!q.empty()) {
-			pair<int, p> front = q.front();
-			q.pop();
-			int d = front.first, x = front.second.first, y = front.second.second;
-			ans = max(ans, d);
-			int flg = 0;
-			for (int k = 0; k < 4; k++) {
-				int nx = x + dx[k], ny = y + dy[k];
-				if (nx < 0 || ny < 0 || nx >= n || ny >= n || chk[nx][ny] == d) continue;
-				if (!arr[nx][ny]) {
-					chk[x][y] = d;
-					arr[x][y] = 0; flg = 1; break;
-				}
+	while (!q.empty() && q.size() != n*n) {
+		pair<int, p> front = q.front();
+		q.pop();
+		int d = front.first, x = front.second.first, y = front.second.second;
+		ans = max(ans, d);
+		int flg = 0;
+		for (int k = 0; k < 4; k++) {
+			int nx = x + dx[k], ny = y + dy[k];
+			if (nx < 0 || ny < 0 || nx >= n || ny >= n || chk[nx][ny] == d) continue;
+			if (!arr[nx][ny]) {
+				chk[x][y] = d;
+				arr[x][y] = 0; flg = 1; break;
 			}
-			if(!flg)q.push({ d + 1, { x, y } });
 		}
-	}
+		if (!flg)q.push({ d + 1, { x, y } });
+	}	
 	printf("%d", ans ? ans : -1);
 	return 0;
 }
