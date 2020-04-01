@@ -48,5 +48,5 @@ int main() {
 
 
 
-구름LEVEL 근묵자흑 goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
+구름LEVEL 온라인 강의 goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
 
