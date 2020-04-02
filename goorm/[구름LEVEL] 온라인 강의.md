@@ -46,6 +46,25 @@ int main() {
 
 
 
+### scanf 구분자 활용
+
+string으로 받을 필요없이 scanf의 구분자를 활용해서 입력을 받으면 더 쉽게 처리할 수 있다.
+
+```c++
+int h1, m1, h2, m2;
+scanf("%d:%d", &h1, &m1);
+scanf("%d:%d", &h2, &m2);
+m1 += h1 * 60;
+m2 += h2 * 60;
+
+if (m1 > m2 || m2 - m1 > 10)
+    printf("0");
+else
+    printf("1");
+```
+
+
+
 
 
 구름LEVEL 온라인 강의 goorm goormlevel 프리미엄 알고리즘 위클리 비타알고 시즌3
