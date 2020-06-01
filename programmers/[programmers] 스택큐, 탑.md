@@ -13,7 +13,7 @@ using namespace std;
 vector<int> solution(vector<int> heights) {
 	vector<int> answer;
 	int flg;
-	for (int i = heights.size() - 1; i >= 1; i--) {
+	for (int i = heights.size() - 1; i >= 0; i--) {
 		int pre = heights[i]; flg = 0;
 		for (int j = i - 1; j >= 0; j--) {
 			if (heights[j] > pre) {
@@ -24,7 +24,6 @@ vector<int> solution(vector<int> heights) {
 		}
 		if (!flg) answer.push_back(0);
 	}
-	answer.push_back(0);
 	reverse(answer.begin(), answer.end());
 	return answer;
 }
