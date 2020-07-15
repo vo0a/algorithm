@@ -9,28 +9,27 @@
 #include <vector>
 #include <queue>
 using namespace std;
-typedef pair<int, int> p;
-queue<p> q;
+queue<int> q;
 priority_queue<int> pq;
 
 int solution(vector<int> priorities, int location) {
     int answer = 0;
     for(int i =0; i<priorities.size(); i++){
-        q.push({priorities[i], i});
+        q.push(i);
         pq.push(priorities[i]);
     }
     while(1){
-        if(q.front().first == pq.top()){
+        if(priorities[q.front()] == pq.top()){
             answer++;
-            if(q.front().second == location){
+            if(q.front() == location){
                 break;
             }
             q.pop();
             pq.pop();            
         }else{
-            p front = q.front();
+            int front = q.front();
             q.pop();
-            q.push({front.first, front.second});
+            q.push(front);
         }
     }
     
