@@ -1,4 +1,4 @@
-## [programmers] 주식가격
+## [programmers] 스택큐, 주식가격
 
 [문제](https://programmers.co.kr/learn/courses/30/lessons/42584?language=cpp)
 
