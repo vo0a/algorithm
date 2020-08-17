@@ -45,6 +45,7 @@ int solution(vector<int> money) {
             else {
                 dp[i][0] = max(dp[i - 1][0], dp[i - 2][0]);
             }
+            break;
         }
         if(dp[i - 1][0] > dp[i- 2][0] + money[i - 1]){
             dp[i][0] = dp[i - 1][0];
@@ -60,7 +61,9 @@ int solution(vector<int> money) {
 }
 ```
 
-옳게 고쳤다고 생각했는데, 40점짜리 코드이다.. 테스트케이스를 추가해서 더 봐야한다.
+옳게 고쳤다고 생각했는데, 40점 -> 75점. 
+
+디버깅 후 `break;`문을 추가하고 75점이 되었지만 아직 실패..
 
 
 
