@@ -12,7 +12,7 @@
 using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
-   sort(lost.begin(), lost.end());
+    sort(lost.begin(), lost.end());
 	sort(reserve.begin(), reserve.end());
 
 	int chk[31] = {0};
@@ -33,6 +33,7 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
 		for (int j = 0; j < lostLength; j++) {
 			if (chk[lost[j]] == 2)continue;
 			if (abs(reserve[i] - lost[j]) == 1) {
+                chk[lost[j]]++;
 				answer++;
                 break;
 			}
@@ -42,6 +43,10 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
 	return answer;
 }
 ```
+
+체육복을 잃어버린 친구와, 체육복 여분을 가진 친구가 동시에 존재할 수 있는 경우가 있기 때문에 해당하는 친구들에 대해서는 사전에 체육복을 입을 수 있고, 체육복을 더 이상 빌려줄 수 없음을 체크해준다.
+
+따라서 위의 경우에 해당하지 않는 친구들에 한해서 체격 차이가 1인 친구들 끼리 체육복을 빌려줄 수 있음을 확인하고 나면 answer이 정답이 된다.
 
 
 
