@@ -32,6 +32,7 @@ int solution(vector<int> money) {
 #include <algorithm>
 using namespace std;
 int dp[1000005][2]; // maxSum, firstSelect
+int dp2[1000005];
 
 int solution(vector<int> money) {
     int answer = 0;
@@ -56,14 +57,80 @@ int solution(vector<int> money) {
             dp[i][1] = dp[i - 2][1];
         }        
     }
-    answer = dp[money.size()][0];
+    
+    dp2[money.size() - 1] = money[money.size() - 1];
+    for(int i = money.size() -2 ; i > 0; i--){
+        dp2[i] = max(dp2[i + 1], dp2[i + 2] + money[i]);
+    }
+    
+    answer = max(dp[money.size()][0], dp2[1]);
     return answer;
 }
 ```
 
-옳게 고쳤다고 생각했는데, 40점 -> 75점. 
+> [10, 1, 1, 1, 1, 1, 100] 일 때, 102가 나와야 하지만 12가 나왔어서
+>
+> 
+>
+> ```c++
+> int dp2[1000005];
+> 
+> ...
+>     
+> dp2[money.size() - 1] = money[money.size() - 1];
+> for(int i = money.size() -2 ; i > 0; i--){
+>     dp2[i] = max(dp2[i + 1], dp2[i + 2] + money[i]);
+> }
+> 
+> answer = max(dp[money.size()][0], dp2[1]);
+> ```
+>
+> dp2를 추가하여 무조건 마지막 집을 포함하는 경우도 같이 고려했다.
+>
+> 배열 두 개를 쓰기 싫어서 다른 방법이 있지 않을까 고민했는데 결국은 배열 두개를 이용하게 됐다.. 
 
-디버깅 후 `break;`문을 추가하고 75점이 되었지만 아직 실패..
+
+
+
+
+### 다른 풀이
+
+```c++
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int dp1[1000005];
+int dp2[1000005];
+ 
+int solution(vector<int> money) 
+{
+    
+    // 출발점 : 첫번째 집
+    dp1[0] = money[0];
+    dp1[1] = money[0];
+    for(int i = 2; i < money.size()-1; i++)
+    {
+        dp1[i] = max(dp1[i-1], dp1[i-2] + money[i]);
+    }
+    
+    // 출발점 : 두번째 집
+    dp2[1] = money[1];
+    for(int i = 2; i < money.size(); i++)
+    {
+        dp2[i] = max(dp2[i-1], dp2[i-2] + money[i]);
+    }
+    
+    return max(dp1[money.size()-2], dp2[money.size()-1]);
+}
+```
+
+- 첫 번째 집을 포함하는 경우 마지막 집을 제외
+- 두 번째 집을 포함하는 경우 마지막 집을 포함
+
+이 두 경우로 나눠서 풀면 간단히 풀린다.
+
+
 
 
 
