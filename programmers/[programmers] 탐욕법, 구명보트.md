@@ -14,6 +14,45 @@ int chk[50005];
 int solution(vector<int> people, int limit) {
 	int answer = 0, size = people.size();
 	sort(people.begin(), people.end());
+	
+    int left = 0, right = size - 1;
+    while(left < right){
+        if(people[left] + people[right] <= limit){
+            chk[left] = chk[right] = 1;
+            left++; right--;
+            answer++;
+        }
+        else {
+            right--;
+        }
+    }
+
+	for (int i = 0; i < people.size(); i++) {
+		if (!chk[i]) answer++;
+	}
+
+	return answer;
+}
+```
+
+처음에 투포인터를 떠올리며 구상은 했는데, 구현할 때 되니 까맣게 잊어버리고 이중 for문을 사용한 것 같다.  허허;; 
+
+
+
+
+
+## 시도 1
+
+```c++
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int chk[50005];
+
+int solution(vector<int> people, int limit) {
+	int answer = 0, size = people.size();
+	sort(people.begin(), people.end());
 	for (int i = 0; i < size / 2; i++) {
 		if (chk[i]) continue;
 		for (int j = size - 1; j > i; j--) {
