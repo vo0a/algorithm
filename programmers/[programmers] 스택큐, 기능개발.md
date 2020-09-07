@@ -1,4 +1,4 @@
-## [programmers] 기능개발
+## [programmers] 스택큐, 기능개발
 
 [문제](https://programmers.co.kr/learn/courses/30/lessons/42586#)
 
