@@ -117,5 +117,113 @@ int main() {
 
 
 
+## 시도 2
+
+```c++
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+typedef pair<int, int> p;
+int t, n, m, Find, d, time[1005], indegree[1005], ans;
+vector<vector<int>> adj;
+
+int main() {
+	scanf("%d", &t);
+	while (t--) {
+		scanf("%d %d", &n, &m);
+		for (int i = 1; i <= n; i++) {
+			scanf("%d", &time[i]);
+		}
+		adj.resize(n + 1);
+		for (int i = 0,a , b; i < m; i++) {
+			scanf("%d%d", &a, &b);
+			adj[a].push_back(b);
+			indegree[b]++;
+		}
+		scanf("%d", &Find);
+
+		queue<p> q;
+
+		for (int i = 1; i <= n; i++) {
+			if (!indegree[i]) q.push({ i, 0 });
+		}
+		// 위상정렬 결과값으로 최소 시간 구하기		
+		// 레벨에서 가장 큰 값을 더해가기
+		int level = -1, Max = 0;
+		for (int i = 1; i <= n; i++) {
+			p front = q.front();
+			q.pop();
+			int num = front.first, depth = front.second;
+
+			// 답이되는 노드가 현재 그래프상에 없을 수도 있음
+			if (num == Find) {
+				if (!depth) ans = time[num];
+				else ans += Max + time[num];
+				break;
+			}
+
+			if (level < depth) {
+				ans += Max;
+				level = depth; Max = time[num];							
+			}			
+			else if (level == depth) {
+				Max = max(Max, time[num]);
+			}
+
+			for (auto e : adj[num]) {
+				if (--indegree[e] == 0) {
+					q.push({ e, depth + 1 });
+				}
+			}
+		}
+
+		printf("%d\n", ans);
+		ans = 0;
+		adj.clear();
+		memset(indegree, 0, sizeof(indegree));
+	}
+	
+	return 0;
+}
+```
+
+- 틀릴 걸 예상했지만 별 다른 생각이 나지 않아 일단 제출해봄
+
+  - 당연히 틀림
+
+  - 아래와 같은 테스트케이스인 경우, `1 → 2 → 3 `이 그리는 그래프와 `4`가 그리는 그래프가 다를 때, 위와 같이 위상정렬을 하면서 정답을 찾을 때 문제가 생긴다.
+
+  - > ```
+    > 1
+    > 4 3
+    > 5 5 5 5
+    > 1 2
+    > 1 3
+    > 2 3
+    > 4
+    > ```
+
+  - 
+    ```c++
+    // 답이되는 노드가 현재 그래프상에 없을 수도 있음
+    			if (num == Find) {
+    				if (!depth) ans = time[num]; // 일단은 이렇게 처리해봤지만..
+    				else ans += Max + time[num];
+    				break;
+    			}
+    ```
+
+  - ``1 → 2 → 3  ` , `5 → 4` 이렇게 주어졌을 때 탐색을 1부터 시작한다면, 정답은 절대 나올 수 없음.
+
+- 고민 끝에 [질문검색](https://www.acmicpc.net/board/view/30959)을 찾아봤고, 힌트를 얻을 수 있었다.
+
+  - DP 로 메모이제이션하면서 다시 풀기!
+
+
+
 백준 1005 ACM Craft boj acmicpc
 
