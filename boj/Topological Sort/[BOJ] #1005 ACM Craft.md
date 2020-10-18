@@ -8,9 +8,73 @@
 
 
 
-| 메모리 | 시간 |
-| ------ | ---- |
-| KB     | 0 ms |
+| 메모리 | 시간   |
+| ------ | ------ |
+| 2648KB | 232 ms |
+
+```c++
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
+#include <cstring>
+#include <algorithm>
+using namespace std;
+typedef pair<int, int> p;
+int t, n, m, Find, d, time[1005];
+vector<vector<int>> adj;
+
+int main() {
+	scanf("%d", &t);
+	while (t--) {
+		
+		scanf("%d %d", &n, &m);
+		for (int i = 1; i <= n; i++) {
+			scanf("%d", &time[i]);
+		}		
+		adj.resize(n + 1);
+		int indegree[1005] = { 0 };		
+		for (int i = 0,a , b; i < m; i++) {
+			scanf("%d%d", &a, &b);
+			adj[a].push_back(b);
+			indegree[b]++;
+		}
+		scanf("%d", &Find);		
+		
+		queue<int> q;
+		int dp[1005] = { 0 }; // 해당 건물을 짓기 시작하는데 걸리는 최소 시간
+		for (int i = 1; i <= n; i++) {
+			if (!indegree[i]) q.push(i);
+		}
+		// 위상정렬 결과값으로 최소 시간 구하기		
+		// Find번 건물의 선행자가 하나도 없을 때까지 반복
+		while (indegree[Find] > 0) {
+			int num = q.front();
+			q.pop();
+
+			for (auto next : adj[num]) {
+				dp[next] = max(dp[next], dp[num] + time[num]); // 무조건 선행자 중 가장 큰값으로 갱신
+				if (--indegree[next] == 0) {
+					q.push(next);
+				}
+			}
+		}
+
+		printf("%d\n", dp[Find] + time[Find]);
+		adj.clear();
+	}
+	
+	return 0;
+}
+```
+
+- 위상정렬을 구하는 반복문도 깔끔해졌고
+- dp 배열을 활용하여 i번째 건물을 짓기 시작하는데 걸리는 최소 시간을 구했다.
+  - 최소의 최대? 최대의 최소? 말장난 같아 복잡하게 생각했는데,
+  - 어쩔 수 없이 선행자가 일을 모두 마친 뒤, 건물을 짓기 시작해야하기 때문에
+  - 선행자들 중 가장 큰 값으로 갱신만하면 되는 문제였다. 
+
+
 
 
 
