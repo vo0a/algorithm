@@ -48,6 +48,37 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
 
 따라서 위의 경우에 해당하지 않는 친구들에 한해서 체격 차이가 1인 친구들 끼리 체육복을 빌려줄 수 있음을 확인하고 나면 answer이 정답이 된다.
 
+### Java
+
+```java
+class Solution {
+    public int solution(int n, int[] lost, int[] reserve) {
+        int answer = n - lost.length;
+        int[] chk = new int[31];
+        for(int i = 0; i<lost.length; i++){
+            chk[lost[i]]--;
+        }
+        for(int i = 0; i<reserve.length; i++){
+            chk[reserve[i]]++;
+        }
+
+        for(int i = 0; i < reserve.length; i++){
+            if(chk[reserve[i]] == 0) { answer++; continue; }
+            if(chk[reserve[i] - 1] < 0){
+                chk[reserve[i] - 1]++; chk[reserve[i]]--;
+                answer++;
+            }
+            else if(chk[reserve[i] + 1] < 0){
+                chk[reserve[i] + 1]++; chk[reserve[i]]--;
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+}
+```
+
 
 
 
