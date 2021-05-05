@@ -7,6 +7,65 @@
 ```c++
 #include <string>
 #include <vector>
+#include <set>
+#include <cmath>
+#include <iostream>
+using namespace std;
+
+int get_basic_number(int N, int cnt) {
+	int res = 0;
+	while (cnt > 0) {
+		cnt -= 1;
+		res += N * pow(10, cnt);
+	}
+	return res;
+}
+
+int solution(int N, int number) {
+	if (N == number) {
+		return 1;
+	}
+
+	int answer = -1;
+	const int MIN = 8;
+	auto s = vector<set<int>>(MIN);
+	// 각 set마다 N, NN, NNN, ... NNNNNNNN 로 초기화
+	int idx = 1;
+	for (auto& x : s) {
+		x.insert(get_basic_number(N, idx));
+		idx += 1;
+	}
+
+	for (int i = 1; i < MIN; i++) {
+		for (int j = 0; j < i; j++) {
+			for (const auto& op1 : s[j]) {
+				for (const auto& op2 : s[i - j - 1]) {
+					s[i].insert(op1 + op2);
+					s[i].insert(op1 - op2);
+					s[i].insert(op1 * op2);
+
+					if (op2 != 0)
+						s[i].insert(op1 / op2);
+				}
+			}
+		}
+
+		if (s[i].find(number) != s[i].end()) {
+			answer = i + 1;
+			break;
+		}
+	}
+
+	return answer;
+}
+```
+
+- 처음에 풀었던 방식이 테스트케이스가 바뀐 후로, 틀려서 다른 방식으로 풀게 되었다.
+- [참고 블로그](https://gurumee92.tistory.com/164)
+
+```c++
+#include <string>
+#include <vector>
 #include <queue>
 #define MAX 32001
 using namespace std;
@@ -64,6 +123,8 @@ int solution(int N, int number) {
 > 1번은 제대로 나왔지만, 2번은 7을 출력해서 문제되는 곳을 봤더니 '(number - front.first) > 0' 부분에서 -가 되어 4가 저장되지 못했고 7을 출력하는 문제가 있었다.
 >
 > 따라서 abs 함수를 이용해서 절댓값으로 바꾼 후 정답을 받을 수 있었다.
+
+
 
 
 
