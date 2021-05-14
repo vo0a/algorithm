@@ -1,6 +1,6 @@
 ## [programmers] 2020 kakao 인턴, 수식 최대화
 
-[문제](https://programmers.co.kr/learn/courses/30/lessons/67256)
+[문제](https://programmers.co.kr/learn/courses/30/lessons/67257)
 
 
 
