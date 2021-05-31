@@ -68,10 +68,12 @@ vector<int> solution(vector<string> words, vector<string> queries) {
 ```
 
 - query의 길이를 기반으로 검색 결과를 찾아야 한다.
-  - word의 길이를 인덱스로 하는 트라이를 만든다. : TrieRoot[], ReTrieRoot[]
+  - word의 길이를 인덱스로 하는 트라이를 만든다 : TrieRoot[], ReTrieRoot[]
 - `?`가 접두사로 주어질 경우를 고려하여 트라이를 두 개 만든다.
   - 하나는 str[0] ... str[length-1] : TrieRoot
+    - ?가 접미사일때 사용할 트리
   - 다른 하나는 str[length-1] ... str[0] : ReTrieRoot
+    - ?가 접두사일때 사용할 트리
 
 
 
