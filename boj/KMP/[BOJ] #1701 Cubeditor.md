@@ -76,11 +76,13 @@ vector<int> preprocessing(string p) {
     int m = p.size();
     vector<int> next(m);
     next[0] = 0;
-    int j = 0;
+    int j = 0; // 매칭된 길이
     for (int i=1; i<m; i++) {
+        // 같을 때까지 j 이동
         while (j>0 && p[i] != p[j]) {
-            j = next[j-1];
+            j = next[j-1]; // 길이와 인덱스의 차이가 1이므로 -1을 해줌
         }
+        // 이동 후 같으면 +1 아니면 0을 넣어줌
         if (p[i] == p[j]) {
             next[i] = j+1;
             j += 1;
