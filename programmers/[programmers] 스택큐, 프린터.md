@@ -4,6 +4,8 @@
 
 
 
+### C++
+
 ```c++
 #include <string>
 #include <vector>
@@ -34,6 +36,49 @@ int solution(vector<int> priorities, int location) {
     }
     
     return answer;
+}
+```
+
+
+
+### Java
+
+```java
+import javafx.util.Pair;
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.PriorityQueue;
+
+class Solution {
+    public int solution(int[] priorities, int location) {
+        LinkedList<Pair<Integer, Integer>> queue = new LinkedList<>();
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(Collections.reverseOrder());
+
+
+        for (int i = 0; i < priorities.length; i++) {
+            queue.add(new Pair<>(priorities[i], i));
+            priorityQueue.add(priorities[i]);
+        }
+
+        int count = 0;
+        while (!queue.isEmpty()) {
+            int value = queue.peek().getKey();
+            int index = queue.poll().getValue(); // 반환하면서 pop
+
+            if (value != priorityQueue.peek()) {
+                queue.add(new Pair<>(value, index));
+            } else {
+                count++;
+                priorityQueue.remove();
+                if (location == index) {
+                    break;
+                }
+            }
+        }
+
+        return count;
+    }
 }
 ```
 

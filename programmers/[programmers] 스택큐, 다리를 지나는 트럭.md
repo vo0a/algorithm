@@ -76,6 +76,40 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
 
 
 
+### Java
+
+```java
+import javafx.util.Pair;
+
+import java.util.LinkedList;
+
+class Solution {
+    public int solution(int bridge_length, int weight, int[] truck_weights) {
+        LinkedList<Pair<Integer, Integer>> queue = new LinkedList<>(); // wegith, second;
+
+        int wieghtSum = 0, time = 0;
+        for (int i = 0; i < truck_weights.length; i++) {
+            int truck = truck_weights[i];
+            while (true) {
+                if (!queue.isEmpty() && time - queue.peek().getValue() >= bridge_length) {
+                    wieghtSum -= queue.poll().getKey();
+                }
+                if (wieghtSum + truck <= weight) {
+                    wieghtSum += truck;
+                    queue.add(new Pair<>(truck, time++));
+                    break;
+                }
+                else time++;
+            }
+        }
+
+        return time + bridge_length;
+    }
+}
+```
+
+- 투 포인터 처럼 쓰면 반복문 하나로 풀 수 있는데 복잡해서 나중에...
+
 
 
 프로그래머스 고득점 키트 스택/큐 다리를 지나는 트럭
